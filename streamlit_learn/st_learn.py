@@ -1,12 +1,14 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
+import os
 
 @st.cache_data
 def load_data(datafile_dir):
-    df_tri = pd.read_csv('benchmarks/' + datafile_dir + '/test2id.txt', sep = ' ', header = None, names = ['h', 't', 'r'], skiprows = 1)
-    df_ent = pd.read_csv('benchmarks/' + datafile_dir + '/entity2id.txt', sep = '\t', header = None, names = ['ent', 'no'], skiprows = 1)
-    df_rel = pd.read_csv('benchmarks/' + datafile_dir + '/relation2id.txt', sep = '\t', header = None, names = ['rel', 'no'], skiprows = 1)
+    file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "./benchmarks/" + datafile_dir))
+    df_tri = pd.read_csv(file_path + '/test2id.txt', sep = ' ', header = None, names = ['h', 't', 'r'], skiprows = 1)
+    df_ent = pd.read_csv(file_path + '/entity2id.txt', sep = '\t', header = None, names = ['ent', 'no'], skiprows = 1)
+    df_rel = pd.read_csv(file_path + '/relation2id.txt', sep = '\t', header = None, names = ['rel', 'no'], skiprows = 1)
     head_sets = df_ent[df_ent['no'].isin(df_tri['h'].tolist())]
     tail_sets = df_ent[df_ent['no'].isin(df_tri['t'].tolist())]
     rel_sets = df_rel[df_rel['no'].isin(df_tri['r'].tolist())]
