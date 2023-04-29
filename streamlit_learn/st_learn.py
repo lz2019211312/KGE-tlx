@@ -49,21 +49,6 @@ st.set_page_config(
     initial_sidebar_state='expanded'
 )
 
-import streamlit as st
-
-# Using object notation
-add_selectbox = st.sidebar.selectbox(
-    "How would you like to be contacted?",
-    ("Email", "Home phone", "Mobile phone")
-)
-
-# Using "with" notation
-with st.sidebar:
-    add_radio = st.radio(
-        "Choose a shipping method",
-        ("Standard (5-15 days)", "Express (2-5 days)")
-    )
-
 st.title('基于知识图谱嵌入模型的知识图谱补全任务')
 
 st.divider()
